@@ -11,6 +11,7 @@ import { Product } from '../interfaces/Product.interface';
 import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'ProductPage',
@@ -32,7 +33,7 @@ export default class ProductPageComponent implements OnInit {
 
   createForm() {
     return new FormGroup({
-      id: new FormControl(0),
+      id: new FormControl(null),
       nombre: new FormControl(''),
       descripcion: new FormControl(''),
       precio: new FormControl(0),
@@ -71,9 +72,10 @@ export default class ProductPageComponent implements OnInit {
   addupdateProduct() {
     // const producto: Product = this.formProduct.value;
 
-    if (this.id() != 0)
+    if (this.id() == 0)
       this.productService.addProduct(this.formProduct.value).subscribe({
         next: (res) => {
+          Swal.fire('Exito','El producto se creo correctamente','success');
           this.formProduct.reset();
         },
         error: (err) => console.error('Error al guardar producto:', err),

@@ -5,7 +5,8 @@ import { Product } from '../interfaces/Product.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class ProductService {  
+export class ProductService {
+  
   private http = inject(HttpClient);
   listpro = signal<Product[]>([]);
 
@@ -32,4 +33,8 @@ export class ProductService {
   updateProduct(id: number,dataProduct:Product) {
     return this.http.put<Product>(`${environment.ApiGCO}/product/${id}`,dataProduct);
   }
+
+  deleteProduct(id: number) {
+    return this.http.delete(`${environment.ApiGCO}/product/${id}`,{ responseType: 'text' });
+  }  
 }
