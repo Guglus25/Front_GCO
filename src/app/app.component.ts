@@ -2,9 +2,6 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-
-
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet],
@@ -12,13 +9,8 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   
 })
 export class AppComponent {
-   constructor(private modalService: NgbModal) {
+   constructor() {
 
   }
 
-  public open(modal: any): void {
-
-    this.modalService.open(modal);
-
-  }
 }

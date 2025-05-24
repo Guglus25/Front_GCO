@@ -13,7 +13,7 @@ export class ProductService {
     
   }
   listProduct() {
-    this.http
+     return this.http
       .get<Product[]>(`${environment.ApiGCO}/product`)
       .subscribe((resp) => {
         this.listpro.set(resp);
@@ -25,7 +25,7 @@ export class ProductService {
       .get<Product>(`${environment.ApiGCO}/product/${id}`);
   }
 
-  addProduct() {
-    // this.http.post(`${environment.ApiGCO}/product`);
+  addProduct(dataprodu:Product) {    
+    return this.http.post<Product>(`${environment.ApiGCO}/product`,dataprodu);
   }
 }

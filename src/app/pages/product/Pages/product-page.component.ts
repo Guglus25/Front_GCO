@@ -1,23 +1,75 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { ProductService } from '../Services/Product.service';
 import { Product } from '../interfaces/Product.interface';
+import { ActivatedRoute, RouterLink, RouterLinkActive } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'ProductPage',
-  imports: [],
+  imports: [ReactiveFormsModule,
+    RouterLink
+  ],
   templateUrl: './product-page.component.html',
 })
-export default class ProductPageComponent {
+export default class ProductPageComponent implements OnInit {
   public productService = inject(ProductService);
   dataProduct = signal<Product | null>(null);
 
-  findproduc() {
-    this.productService.findProduct(0).subscribe((resp) => {
-      this.dataProduct.set(resp);
+  id = toSignal(
+    inject(ActivatedRoute).params.pipe(map((params) => params['id']))
+  );
+
+  formProduct: FormGroup;
+  constructor() {
+    this.formProduct = this.createForm();
+  }
+
+  createForm() {
+    return new FormGroup({      
+      nombre: new FormControl(''),
+      descripcion: new FormControl(''),
+      precio: new FormControl(0),
+      stock: new FormControl(0),
+      categoria: new FormControl(''),
+      codigo: new FormControl(''),
+      fechaCreacion:new FormControl(this.getTodayDate())
     });
+  }
+  getTodayDate(): string {
+  const today = new Date();
+  return today.toISOString().split('T')[0]; // yyyy-MM-dd
+}
+
+  ngOnInit(): void {
+   this.LoadInfo();
+  }
+
+  LoadInfo() {
+    if (this.id() != 0) {
+       
+      this.productService.findProduct(this.id()).subscribe((resp) => {
+        this.dataProduct.set(resp);
+      });
+     
+    }
   }
 
   addProduct() {
-    this.productService.addProduct();
+      // const producto: Product = this.formProduct.value;
+      
+    this.productService.addProduct(this.formProduct.value).subscribe({
+      next: (res) => {
+        this.formProduct.reset();
+      },
+      error: (err) => console.error('Error al guardar producto:', err)
+    });
   }
 }
