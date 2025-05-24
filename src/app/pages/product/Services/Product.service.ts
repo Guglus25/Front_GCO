@@ -5,7 +5,7 @@ import { Product } from '../interfaces/Product.interface';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class ProductService {
+export class ProductService {  
   private http = inject(HttpClient);
   listpro = signal<Product[]>([]);
 
@@ -27,5 +27,9 @@ export class ProductService {
 
   addProduct(dataprodu:Product) {    
     return this.http.post<Product>(`${environment.ApiGCO}/product`,dataprodu);
+  }
+
+  updateProduct(id: number,dataProduct:Product) {
+    return this.http.put<Product>(`${environment.ApiGCO}/product/${id}`,dataProduct);
   }
 }
