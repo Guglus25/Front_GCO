@@ -1,58 +1,65 @@
-<div class="row justify-content-center">
-    <div class="col-md-6 col-lg-4">
-        <form>
-            <h2>Productos</h2>
-            <div class="mb-2">
-                <label for="exampleInputEmail1" class="form-label">Nombre del producto</label>
-                <input type="text" class="form-control" 
-                [value]="nombre()"
-                (change)="nombre.set(txtNombre.value)"
-                #txtNombre
-                >
+<div class="space-y-12">
+    <div class="mt-10 grid grid-cols-3 gap-x-6 gap-y-8 ">
+        <form class="col-start-2 col-end-2">
+            
+                <h2 class="text-base/7 font-semibold text-gray-900">Productos</h2>
+            <br/>
+            <br/>
+            <div class="sm:col-span-6">
+                <label for="nombre" class="block text-sm/6 font-medium text-gray-900">Nombre del producto </label>
+                <div class="mt-2">
+                    <input type="text" name="txtNombre" id="txtNombre" [value]="nombre()"
+                        (change)="nombre.set(txtNombre.value)" #txtNombre
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
             </div>
-            <div class="mb-2">
-                <label for="exampleInputPassword1" class="form-label">Descripción</label>
-                <textarea type="text" class="form-control" rowa="3"
-                [value]="descripcion()"
-                (change)="descripcion.set(txtDescripcion.value)"
-                #txtDescripcion
-                ></textarea>
+            <div class="sm:col-span-6">
+                <label for="descripcion" class="block text-sm/6 font-medium text-gray-900">Descripción</label>
+                <div class="mt-2">
+                    <textarea type="text" name="txtDescripcion" id="txtDescripcion" rows="3" [value]="descripcion()"
+                        (change)="descripcion.set(txtDescripcion.value)" #txtDescripcion
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+                </div>
             </div>
-            <div class="mb-2">
-                <label for="exampleInputEmail1" class="form-label">Precio</label>
-                <input type="number" class="form-control"
-                [value]="precio()"                
-                (change)="precio.set(+txtPrecio.value)"
-                #txtPrecio
-                >
+            <div class="sm:col-span-6">
+                <label for="precio" class="block text-sm/6 font-medium text-gray-900">Precio</label>
+                <div class="mt-2">
+                    <input type="number" name="txtPrecio" id="txtPrecio" [value]="precio()"
+                        (change)="precio.set(+txtPrecio.value)" #txtPrecio
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
             </div>
-            <div class="mb-2">
-                <label for="exampleInputEmail1" class="form-label">Stock</label>
-                <input type="text" class="form-control"
-                [value]="stock()"
-                (change)="stock.set(txtStock.value)"
-                #txtStock
-                >
+            <div class="sm:col-span-6">
+                <label for="stock" class="block text-sm/6 font-medium text-gray-900">Stock</label>
+                <div class="mt-2">
+                    <input type="number" name="txtStock" id="txtStock" [value]="stock()"
+                        (change)="stock.set(txtStock.value)" #txtStock
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
             </div>
-            <div class="mb-2">
-                <label for="exampleInputEmail1" class="form-label">Categoría</label>
-                <input type="text" class="form-control"
-                [value]="categoria()"
-                (change)="categoria.set(txtCategoria.value)"
-                #txtCategoria
-                >
+            <div class="sm:col-span-6">
+                <label for="categoria" class="block text-sm/6 font-medium text-gray-900">Categoría</label>
+                <div class="mt-2">
+                    <input type="number" name="txtCategoria" id="txtCategoria" [value]="categoria()"
+                        (change)="categoria.set(txtCategoria.value)" #txtCategoria
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
             </div>
-            <div class="mb-2">
-                <label for="exampleInputEmail1" class="form-label">Código</label>
-                <input type="text" class="form-control"
-                [value]="codigo()"
-                (change)="codigo.set(txtCodigo.value)"
-                #txtCodigo
-                >
+            <div class="sm:col-span-6">
+                <label for="codigo" class="block text-sm/6 font-medium text-gray-900">Código</label>
+                <div class="mt-2">
+                    <input type="number" name="txtCodigo" id="txtCodigo" [value]="codigo()"
+                        (change)="codigo.set(txtCodigo.value)" #txtCodigo
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                </div>
+            </div>
 
-            </div>
+            <div class="mt-6 flex items-center justify-end gap-x-6">
 
-            <button type="submit" class="btn btn-primary" (click)="productService.addProduct()">Guardar</button>
+                <button type="submit" (click)="productService.addProduct()"
+                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    Guardar</button>
+            </div>
         </form>
     </div>
 </div>
