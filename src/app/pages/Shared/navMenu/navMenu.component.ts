@@ -1,8 +1,15 @@
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'nav-menu',
-  imports: [],
+  imports: [
+    RouterLink, 
+    RouterLinkActive
+  ],
   templateUrl: './navMenu.component.html',
 })
-export class NavMenuComponent {}
+export class NavMenuComponent {
+
+
+}

@@ -11,14 +11,21 @@ export const routes: Routes = [
           import('./pages/product/Pages/product-page.component'),
       },
       {
-        path: 'movement',
+        path: 'productlist',
         loadComponent: () =>
-          import('./pages/movements/Pages/movements.component'),
+          import('./pages/product/Pages/productList-page.component'),
       },
       {
-        path: '**',
-        redirectTo: 'home',
+        path: 'movement',
+        loadComponent: () =>
+          import('./pages/movements/Pages/movements-page.component'),
       },
+      {
+        path: 'movementlist',
+        loadComponent: () =>
+          import('./pages/movements/Pages/movementsList-page.component'),
+      },
+      
     ],
   },
 

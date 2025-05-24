@@ -8,15 +8,15 @@
             <div class="sm:col-span-6">
                 <label for="nombre" class="block text-sm/6 font-medium text-gray-900">Nombre del producto </label>
                 <div class="mt-2">
-                    <input type="text" name="txtNombre" id="txtNombre" [value]="nombre()"
-                        (change)="nombre.set(txtNombre.value)" #txtNombre
+                    <input type="text" name="txtNombre" id="txtNombre" [value]="dataProduct()?.nombre"
+                        (change)=" dataProduct.set()" #txtNombre
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                 </div>
             </div>
             <div class="sm:col-span-6">
                 <label for="descripcion" class="block text-sm/6 font-medium text-gray-900">Descripción</label>
                 <div class="mt-2">
-                    <textarea type="text" name="txtDescripcion" id="txtDescripcion" rows="3" [value]="descripcion()"
+                    <textarea type="text" name="txtDescripcion" id="txtDescripcion" rows="3" [value]="dataProduct()?.descripcion"
                         (change)="descripcion.set(txtDescripcion.value)" #txtDescripcion
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
                 </div>
@@ -24,7 +24,7 @@
             <div class="sm:col-span-6">
                 <label for="precio" class="block text-sm/6 font-medium text-gray-900">Precio</label>
                 <div class="mt-2">
-                    <input type="number" name="txtPrecio" id="txtPrecio" [value]="precio()"
+                    <input type="number" name="txtPrecio" id="txtPrecio" [value]="dataProduct()?.precio"
                         (change)="precio.set(+txtPrecio.value)" #txtPrecio
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                 </div>
@@ -32,7 +32,7 @@
             <div class="sm:col-span-6">
                 <label for="stock" class="block text-sm/6 font-medium text-gray-900">Stock</label>
                 <div class="mt-2">
-                    <input type="number" name="txtStock" id="txtStock" [value]="stock()"
+                    <input type="number" name="txtStock" id="txtStock" [value]="dataProduct()?.stock"
                         (change)="stock.set(txtStock.value)" #txtStock
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                 </div>
@@ -40,7 +40,7 @@
             <div class="sm:col-span-6">
                 <label for="categoria" class="block text-sm/6 font-medium text-gray-900">Categoría</label>
                 <div class="mt-2">
-                    <input type="number" name="txtCategoria" id="txtCategoria" [value]="categoria()"
+                    <input type="number" name="txtCategoria" id="txtCategoria" [value]="dataProduct()?.categoria"
                         (change)="categoria.set(txtCategoria.value)" #txtCategoria
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                 </div>
@@ -48,7 +48,7 @@
             <div class="sm:col-span-6">
                 <label for="codigo" class="block text-sm/6 font-medium text-gray-900">Código</label>
                 <div class="mt-2">
-                    <input type="number" name="txtCodigo" id="txtCodigo" [value]="codigo()"
+                    <input type="number" name="txtCodigo" id="txtCodigo" [value]="dataProduct()?.codigo"
                         (change)="codigo.set(txtCodigo.value)" #txtCodigo
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
                 </div>
@@ -56,7 +56,7 @@
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
 
-                <button type="submit" (click)="productService.addProduct()"
+                <button type="submit" (click)="addProduct()"
                     class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Guardar</button>
             </div>

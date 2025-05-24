@@ -3,8 +3,8 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-movements',
   imports: [],
-  templateUrl: './movements.component.html',  
+  templateUrl: './movements-page.component.html',  
 })
-export default class MovementsComponent {
+export default class MovementsPageComponent {
 
 }
