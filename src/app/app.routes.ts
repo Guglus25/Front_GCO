@@ -1,10 +1,25 @@
 import { Routes } from '@angular/router';
-import { ProductPageComponent } from './pages/product/product-page.component';
 
 export const routes: Routes = [
-{
-    path: '',
-    component: ProductPageComponent,
-},
+  {
+    path: 'Home',
+    loadComponent: () => import('./pages/product/Pages/product-page.component'),
+    children: [
+      {
+        path: 'product',
+        loadComponent: () =>
+          import('./pages/product/Pages/product-page.component'),
+      },
+      {
+        path: 'movement',
+        loadComponent: () =>
+          import('./pages/movements/Pages/movements.component'),
+      },
+    ],
+  },
 
+  {
+    path: '**',
+    redirectTo: 'product',
+  },
 ];
