@@ -8,15 +8,15 @@ import { Movements } from '../interfaces/movements.interface';
 })
 export class MovementServiceService {
   private http = inject(HttpClient);
-  listpro = signal<Movements[]>([]);
+  listmovem = signal<Movements[]>([]);
 
   constructor() {}
 
-  listMovement() {
+  listMovement(idProducto:number) {
     return this.http
-      .get<Movements[]>(`${environment.ApiGCO}/movement`)
+      .get<Movements[]>(`${environment.ApiGCO}/movement/${idProducto}`)
       .subscribe((resp) => {
-        this.listpro.set(resp);
+        this.listmovem.set(resp);
       });
   }
 

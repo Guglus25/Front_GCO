@@ -16,12 +16,12 @@ export const routes: Routes = [
           import('./pages/product/Pages/productList-page.component'),
       },
       {
-        path: 'movement',
+        path: 'movement/:idproducto/:id',
         loadComponent: () =>
           import('./pages/movements/Pages/movements-page.component'),
       },
       {
-        path: 'movementlist',
+        path: 'movementlist/:idproducto',
         loadComponent: () =>
           import('./pages/movements/Pages/movementsList-page.component'),
       },

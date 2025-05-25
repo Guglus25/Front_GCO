@@ -1,8 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Component, inject, signal } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { MovementServiceService } from '../Services/movement.service.service';
+import Swal from 'sweetalert2';
+import { toSignal } from '@angular/core/rxjs-interop';
+import { map } from 'rxjs';
+import { ProductService } from '../../product/Services/Product.service';
+import { Product } from '../../product/interfaces/Product.interface';
 
 @Component({
   selector: 'app-movements-list-page',
@@ -11,6 +16,51 @@ import { MovementServiceService } from '../Services/movement.service.service';
 })
 export default class MovementsListPageComponent { 
 movementService = inject(MovementServiceService);
+productService = inject(ProductService);
+id = toSignal(
+    inject(ActivatedRoute).params.pipe(map((params) => params['idproducto']))
+  );
 
+  productInterf=signal<Product|null>(null);
+constructor() {
+  this.listMovements(this.id());
+  this.productInfo(this.id());
+  }
 
+  listMovements(idProducto:number) {
+   this.movementService.listMovement(idProducto);
+  }
+
+ productInfo(id:number) {
+    if (id != 0) {
+      this.productService.findProduct(this.id()).subscribe((resp) => {
+         this.productInterf.set(resp);
+      });
+    }
+  }
+
+  deleteProduct(id: number) {
+    Swal.fire({
+      title: 'Confirmación',
+      text: '¿Deseas eliminar el procuto?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.movementService.deleteProduct(id).subscribe({
+          next: (res) => {
+            Swal.fire(
+              '¡Eliminado!',
+              'El producto fue eliminado correctamente.',
+              'success'
+            );
+            this.listMovements(id);
+          },
+          error: (err) => console.error('Error al ELIMINAR producto:', err),
+        });
+      }
+    });
+  }
 }
