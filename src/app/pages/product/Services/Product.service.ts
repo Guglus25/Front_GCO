@@ -13,13 +13,13 @@ export class ProductService {
   constructor() {
     
   }
-  listProduct() {
-     return this.http
-      .get<Product[]>(`${environment.ApiGCO}/product`)
-      .subscribe((resp) => {
-        this.listpro.set(resp);
-      });
-  }
+    listProduct() {
+      return this.http
+        .get<Product[]>(`${environment.ApiGCO}/product`)
+        .subscribe((resp) => {
+          this.listpro.set(resp);
+        });
+    }
   
   findProduct(id:number) {
     return this.http
