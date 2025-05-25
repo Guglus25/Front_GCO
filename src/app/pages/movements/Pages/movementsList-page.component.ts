@@ -8,36 +8,32 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ProductService } from '../../product/Services/Product.service';
 import { Product } from '../../product/interfaces/Product.interface';
+import { InfoProductComponent } from "../../product/Pages/components/infoProduct.component";
 
 @Component({
   selector: 'app-movements-list-page',
-  imports: [CommonModule, RouterLink, SweetAlert2Module],
+  imports: [CommonModule, RouterLink, SweetAlert2Module, 
+    InfoProductComponent,],
   templateUrl: './movementsList-page.component.html',  
 })
 export default class MovementsListPageComponent { 
 movementService = inject(MovementServiceService);
 productService = inject(ProductService);
-id = toSignal(
+idproducto = toSignal(
     inject(ActivatedRoute).params.pipe(map((params) => params['idproducto']))
   );
 
   productInterf=signal<Product|null>(null);
 constructor() {
-  this.listMovements(this.id());
-  this.productInfo(this.id());
+  this.listMovements(this.idproducto());
+  
   }
 
   listMovements(idProducto:number) {
    this.movementService.listMovement(idProducto);
   }
 
- productInfo(id:number) {
-    if (id != 0) {
-      this.productService.findProduct(this.id()).subscribe((resp) => {
-         this.productInterf.set(resp);
-      });
-    }
-  }
+
 
   deleteProduct(id: number) {
     Swal.fire({

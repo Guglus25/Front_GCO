@@ -1,1 +1,47 @@
-<p>movements works!</p>
+<div class="space-y-12">
+    <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 ">
+
+        <ng-container *ngIf="idproducto()">
+            <info-product [id]="idproducto()"></info-product>
+        </ng-container>
+
+        <div class="mt-10 grid grid-cols-3 gap-x-6 gap-y-8 ">
+            <form [formGroup]="formMovement" (ngSubmit)="addupdateMovement()" class="col-start-2 col-end-2">
+                <h2 class="text-base/7 font-semibold text-gray-900">Movimiento</h2>
+                <br />
+                <br />
+
+                <div class="sm:col-span-6">
+                    <label for="descripcion" class="block text-sm/6 font-medium text-gray-900">Descripción</label>
+                    <div class="mt-2">
+                        <textarea type="text" formControlName="descripcion" id="txtDescripcion" rows="3"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+                    </div>
+                </div>
+                <div class="sm:col-span-6">
+                    <label for="precio" class="block text-sm/6 font-medium text-gray-900">Tipo</label>
+                    <div class="mt-2">
+                        <input type="text" formControlName="tipo" id="txtPrecio"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    </div>
+                </div>
+                <div class="sm:col-span-6">
+                    <label for="stock" class="block text-sm/6 font-medium text-gray-900">Cantidad</label>
+                    <div class="mt-2">
+                        <input type="number" formControlName="cantidad" id="txtStock"
+                            class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    </div>
+                </div>
+
+                <div class="mt-6 flex items-center justify-end gap-x-6">
+
+                    <button type="submit"
+                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Guardar</button>
+                    <button type="button" [routerLink]="['/home/productlist']"
+                        class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                        Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>

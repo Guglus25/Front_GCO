@@ -1,10 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import {
-  FormBuilder,
+import {  
   FormControl,
   FormGroup,
-  ReactiveFormsModule,
-  Validators,
+  ReactiveFormsModule,  
 } from '@angular/forms';
 import { ProductService } from '../Services/Product.service';
 import { Product } from '../interfaces/Product.interface';
