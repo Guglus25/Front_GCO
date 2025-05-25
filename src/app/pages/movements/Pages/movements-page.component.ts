@@ -1,5 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
-import { MovementServiceService } from '../Services/movement.service.service';
+import { MovementService } from '../Services/movement.service';
 import { Movements } from '../interfaces/movements.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
@@ -9,18 +9,20 @@ import Swal from 'sweetalert2';
 import { InfoProductComponent } from '../../product/Pages/components/infoProduct.component';
 import { CommonModule } from '@angular/common';
 
-
 @Component({
   selector: 'app-movements',
-  imports: [CommonModule,
-    ReactiveFormsModule, 
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
     RouterLink,
-    InfoProductComponent],
+    InfoProductComponent,
+  ],
   templateUrl: './movements-page.component.html',
 })
 export default class MovementsPageComponent {
-  public movementService = inject(MovementServiceService);
+  public movementService = inject(MovementService);
   dataMovemnt = signal<Movements | null>(null);
+  showInfoProduct = true;
 
   id = toSignal(
     inject(ActivatedRoute).params.pipe(map((params) => params['id']))
@@ -33,9 +35,9 @@ export default class MovementsPageComponent {
 
   constructor() {
     this.formMovement = this.createForm();
+    this.resetChild();
   }
 
-  
   createForm() {
     return new FormGroup({
       id: new FormControl(null),
@@ -53,37 +55,45 @@ export default class MovementsPageComponent {
 
   LoadInfo() {
     if (this.id() != 0) {
-      this.movementService.findProduct(this.id()).subscribe((resp) => {
+      this.movementService.findMovement(this.id()).subscribe((resp) => {
         this.formMovement.setValue({
-          id: resp.id,          
+          id: resp.id,
           descripcion: resp.descripcion,
-          idproducto:resp.idProducto,
-          tipo:resp.tipo,
-          cantidad:resp.cantidad,
-          fecha:resp.fecha
+          idproducto: resp.idProducto,
+          tipo: resp.tipo,
+          cantidad: resp.cantidad,
+          fecha: resp.fecha,
         });
       });
     }
   }
 
+
+resetChild() {
+  this.showInfoProduct = false;
+  setTimeout(() => this.showInfoProduct = true, 0); // Vuelve a montar el hijo
+}
+
   addupdateMovement() {
-      // const producto: Product = this.formProduct.value;
-  
-      if (this.id() == 0)
-        this.movementService.addProduct(this.formMovement.value).subscribe({
+
+
+    if (this.id() == 0)
+      this.movementService.addMovement(this.formMovement.value).subscribe({
+        next: (res) => {
+          Swal.fire('Exito', 'El el movimiento se creo correctamente', 'success');
+          this.formMovement.reset();
+          this.resetChild()
+        },
+        error: (err) => console.error('Error al guardar el movimiento:', err),
+      });
+    else
+      this.movementService
+        .updateMovement(this.id(), this.formMovement.value)
+        .subscribe({
           next: (res) => {
-            Swal.fire('Exito','El producto se creo correctamente','success');
             this.formMovement.reset();
           },
-          error: (err) => console.error('Error al guardar producto:', err),
+          error: (err) => console.error('Error al guardar el movimiento:', err),
         });
-        else
-        this.movementService.updateProduct(this.id(),this.formMovement.value).subscribe({
-          next: (res) => {
-            this.formMovement.reset();
-          },
-          error: (err) => console.error('Error al guardar producto:', err),
-        });
-  
-    }
+  }
 }

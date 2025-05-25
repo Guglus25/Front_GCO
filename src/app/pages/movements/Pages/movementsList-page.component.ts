@@ -2,13 +2,14 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
-import { MovementServiceService } from '../Services/movement.service.service';
+
 import Swal from 'sweetalert2';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { map } from 'rxjs';
 import { ProductService } from '../../product/Services/Product.service';
 import { Product } from '../../product/interfaces/Product.interface';
 import { InfoProductComponent } from "../../product/Pages/components/infoProduct.component";
+import { MovementService } from '../Services/movement.service';
 
 @Component({
   selector: 'app-movements-list-page',
@@ -17,7 +18,7 @@ import { InfoProductComponent } from "../../product/Pages/components/infoProduct
   templateUrl: './movementsList-page.component.html',  
 })
 export default class MovementsListPageComponent { 
-movementService = inject(MovementServiceService);
+movementService = inject(MovementService);
 productService = inject(ProductService);
 idproducto = toSignal(
     inject(ActivatedRoute).params.pipe(map((params) => params['idproducto']))
@@ -45,7 +46,7 @@ constructor() {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.movementService.deleteProduct(id).subscribe({
+        this.movementService.deleteMovement(id).subscribe({
           next: (res) => {
             Swal.fire(
               '¡Eliminado!',
