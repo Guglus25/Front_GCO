@@ -34,6 +34,7 @@ src/
 │   │   ├── pages/         # Páginas de movimientos
 │   │   └── services/      # Servicios de movimientos
 │   ├── product/           # Módulo de productos
+│   │   ├── components     #Componentes de producto
 │   │   ├── interfaces/    # Interfaces de productos
 │   │   ├── pages/        # Páginas de productos
 │   │   └── services/     # Servicios de productos
