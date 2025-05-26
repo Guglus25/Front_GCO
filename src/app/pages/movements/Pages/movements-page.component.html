@@ -12,7 +12,7 @@
 
         <div class=" grid grid-cols-3 gap-x-6 gap-y-8 ">
             <form [formGroup]="formMovement" (ngSubmit)="addupdateMovement()" class="col-start-2 col-end-2">
-                
+
                 <div class="grid grid-cols-2 md:gap-6">
                     <div class="">
                         <label for="precio" class="block text-sm/6 font-medium text-gray-900">Tipo</label>
@@ -22,6 +22,15 @@
                                 <option selected value="Entrada">Entrada</option>
                                 <option value="Salida">Salida</option>
                             </select>
+                            <div *ngIf="formMovement.get('tipo')?.invalid && formMovement.get('tipo')?.touched">
+                                <small *ngIf="formMovement.get('tipo')?.errors?.['required']">
+
+                                    <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                        role="alert">
+                                        <span class="font-medium">El tipo es obligatorio</span>
+                                    </div>
+                                </small>
+                            </div>
                         </div>
                     </div>
                     <div class="">
@@ -29,6 +38,15 @@
                         <div class="mt-2">
                             <input type="number" formControlName="cantidad" id="txtStock"
                                 class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                            <div *ngIf="formMovement.get('cantidad')?.invalid && formMovement.get('cantidad')?.touched">
+                                <small *ngIf="formMovement.get('cantidad')?.errors?.['required']">
+
+                                    <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                        role="alert">
+                                        <span class="font-medium">La cantidad es obligatoria</span>
+                                    </div>
+                                </small>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -37,14 +55,25 @@
                     <div class="mt-2">
                         <textarea type="text" formControlName="descripcion" id="txtDescripcion" rows="3"
                             class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+                        <div
+                            *ngIf="formMovement.get('descripcion')?.invalid && formMovement.get('descripcion')?.touched">
+                            <small *ngIf="formMovement.get('descripcion')?.errors?.['required']">
+
+                                <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                    role="alert">
+                                    <span class="font-medium">La categoría es obligatoria</span>
+                                </div>
+                            </small>
+                        </div>
                     </div>
                 </div>
                 <div class="mt-6 flex items-center justify-end gap-x-6">
 
-                    <button type="submit"
-                        class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <button type="submit" [disabled]="formMovement.invalid"
+                        [ngClass]="formMovement.invalid?'bg-gray-400 cursor-not-allowed': 'bg-indigo-600' "
+                        class="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Guardar</button>
-                    <button type="button" [routerLink]="['/home/productlist']"
+                    <button type="button" [routerLink]="['/home/movementlist',idproducto()]"
                         class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                         Cancelar</button>
                 </div>

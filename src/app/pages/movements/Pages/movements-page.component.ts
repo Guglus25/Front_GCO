@@ -4,7 +4,7 @@ import { Movements } from '../interfaces/movements.interface';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { map } from 'rxjs';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import Swal from 'sweetalert2';
 import { InfoProductComponent } from '../../product/Pages/components/infoProduct.component';
 import { CommonModule } from '@angular/common';
@@ -42,10 +42,10 @@ export default class MovementsPageComponent {
     return new FormGroup({
       id: new FormControl(null),
       idProducto: new FormControl(this.idproducto()),
-      tipo: new FormControl(''),
-      cantidad: new FormControl(0),
+      tipo: new FormControl('',Validators.required),
+      cantidad: new FormControl(null,Validators.required),
       fecha: new FormControl(this.getTodayDate()),
-      descripcion: new FormControl(''),
+      descripcion: new FormControl('',Validators.required),
     });
   }
   getTodayDate(): string {
@@ -82,6 +82,7 @@ resetChild() {
         next: (res) => {
           Swal.fire('Exito', 'El el movimiento se creo correctamente', 'success');
           this.formMovement.reset();
+          this.formMovement = this.createForm();
           this.resetChild()
         },
         error: (err) => console.error('Error al guardar el movimiento:', err),

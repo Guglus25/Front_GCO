@@ -14,7 +14,7 @@ export class MovementService {
 
   listMovement(idProducto: number) {
     return this.http
-      .get<Movements[]>(`${environment.ApiGCO}/movement/${idProducto}`)
+      .get<Movements[]>(`${environment.ApiGCO}/movement/product/${idProducto}`)
       .subscribe((resp) => {
         this.listmovem.set(resp);
       });

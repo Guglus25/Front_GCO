@@ -1,61 +1,114 @@
 <div class="space-y-12">
     <div class="mt-10 grid grid-cols-3 gap-x-6 gap-y-8 ">
-        <form [formGroup]="formProduct" (ngSubmit)="addupdateProduct()"
-        class="col-start-2 col-end-2">
-            
-                <h2 class="text-base/7 font-semibold text-gray-900">Productos</h2>
-            <br/>
-            <br/>
+        <form [formGroup]="formProduct" (ngSubmit)="addupdateProduct()" class="col-start-2 col-end-2">
+
+            <h2 class="text-base/7 font-semibold text-gray-900">Productos</h2>
+            <br />
+            <br />
             <div class="sm:col-span-6">
                 <label for="nombre" class="block text-sm/6 font-medium text-gray-900">Nombre del producto </label>
                 <div class="mt-2">
-                    <input type="text" formControlName="nombre" id="txtNombre"
-                        
-                        class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <input type="text" formControlName="nombre" id="nombre" required
+                        class="block w-full rounded-md bg-white px-3 py-1.5 text -base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <div *ngIf="formProduct.get('nombre')?.invalid && formProduct.get('nombre')?.touched">
+                        <small *ngIf="formProduct.get('nombre')?.errors?.['required']">
+
+                            <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                role="alert">
+                                <span class="font-medium">El nombre es obligatorio</span>
+                            </div>
+                        </small>
+                    </div>
                 </div>
             </div>
             <div class="sm:col-span-6">
                 <label for="descripcion" class="block text-sm/6 font-medium text-gray-900">Descripción</label>
                 <div class="mt-2">
-                    <textarea type="text" formControlName="descripcion" id="txtDescripcion" rows="3" 
+                    <textarea type="text" formControlName="descripcion" id="txtDescripcion" rows="3"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"></textarea>
+                    <div *ngIf="formProduct.get('descripcion')?.invalid && formProduct.get('descripcion')?.touched">
+                        <small *ngIf="formProduct.get('descripcion')?.errors?.['required']">
+
+                            <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                role="alert">
+                                <span class="font-medium">La descripcion es obligatoria</span>
+                            </div>
+                        </small>
+                    </div>
                 </div>
             </div>
             <div class="sm:col-span-6">
                 <label for="precio" class="block text-sm/6 font-medium text-gray-900">Precio</label>
                 <div class="mt-2">
-                    <input type="number" formControlName="precio" id="txtPrecio" 
+                    <input type="number" formControlName="precio" id="txtPrecio"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <div *ngIf="formProduct.get('precio')?.invalid && formProduct.get('precio')?.touched">
+                        <small *ngIf="formProduct.get('precio')?.errors?.['required']">
+
+                            <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                role="alert">
+                                <span class="font-medium">El precio es obligatorio</span>
+                            </div>
+                        </small>
+                    </div>
                 </div>
             </div>
             <div class="sm:col-span-6">
                 <label for="stock" class="block text-sm/6 font-medium text-gray-900">Stock</label>
                 <div class="mt-2">
-                    <input type="number" formControlName="stock" id="txtStock" 
+                    <input type="number" formControlName="stock" id="txtStock"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <div *ngIf="formProduct.get('stock')?.invalid && formProduct.get('stock')?.touched">
+                        <small *ngIf="formProduct.get('stock')?.errors?.['required']">
+
+                            <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                role="alert">
+                                <span class="font-medium">El stock es obligatorio</span>
+                            </div>
+                        </small>
+                    </div>
                 </div>
             </div>
             <div class="sm:col-span-6">
                 <label for="categoria" class="block text-sm/6 font-medium text-gray-900">Categoría</label>
                 <div class="mt-2">
-                    <input type="text" formControlName="categoria" id="txtCategoria" 
+                    <input type="text" formControlName="categoria" id="txtCategoria"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <div *ngIf="formProduct.get('categoria')?.invalid && formProduct.get('categoria')?.touched">
+                        <small *ngIf="formProduct.get('categoria')?.errors?.['required']">
+
+                            <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                role="alert">
+                                <span class="font-medium">La categoría es obligatoria</span>
+                            </div>
+                        </small>
+                    </div>
                 </div>
             </div>
             <div class="sm:col-span-6">
                 <label for="codigo" class="block text-sm/6 font-medium text-gray-900">Código</label>
                 <div class="mt-2">
-                    <input type="text" formControlName="codigo" id="txtCodigo" 
+                    <input type="text" formControlName="codigo" id="txtCodigo"
                         class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <div  *ngIf="formProduct.get('codigo')?.invalid && formProduct.get('codigo')?.touched">
+                        <small *ngIf="formProduct.get('codigo')?.errors?.['required']">
+
+                            <div class="flex items-center p-2 mb-2 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"
+                                role="alert">
+                                <span class="font-medium">El código es obligatorio</span>
+                            </div>
+                        </small>
+                    </div>
                 </div>
             </div>
 
             <div class="mt-6 flex items-center justify-end gap-x-6">
 
-                <button type="submit" 
-                    class="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                <button type="submit" [disabled]="formProduct.invalid"
+                    [ngClass]="formProduct.invalid?'bg-gray-400 cursor-not-allowed': 'bg-indigo-600' "
+                    class="rounded-md  px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Guardar</button>
-                    <button type="button"  [routerLink]="['/home/productlist']" 
+                <button type="button" [routerLink]="['/home/productlist']"
                     class="rounded-md bg-red-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Cancelar</button>
             </div>

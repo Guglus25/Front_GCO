@@ -30,8 +30,10 @@ constructor() {
   
   }
 
-  listMovements(idProducto:number) {
+  listMovements(idProducto:number) {    
    this.movementService.listMovement(idProducto);
+console.log(this.movementService.listmovem())
+
   }
 
 
